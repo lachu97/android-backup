@@ -48,11 +48,11 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             FinalcomposerTheme {
-                val mymeals=viewModel.foodstate.value
+                val mymeals=viewModel.newfoods.value
                 Log.i("MainActivity","new meals=${mymeals}")
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    Greeting("Android", data = data, title = title)
+                    Greeting("Android", data = mymeals, title = title)
                 }
             }
         }
@@ -157,7 +157,7 @@ fun buildlist(): List<Food> {
 
 @ExperimentalCoilApi
 @Composable
-fun Greeting(name: String, data: List<data>, title: List<String>) {
+fun Greeting(name: String, data: List<meals>, title: List<String>) {
     FinalcomposerTheme {
         Column(modifier = Modifier.fillMaxSize()) {
             text(value = "Cater23")

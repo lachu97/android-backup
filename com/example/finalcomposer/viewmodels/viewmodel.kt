@@ -1,6 +1,8 @@
 package com.example.finalcomposer.viewmodels
 
 import android.util.Log
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -16,6 +18,7 @@ import kotlinx.coroutines.launch
 class netviewmodel:ViewModel() {
     private val _food= MutableLiveData<List<meals>>()
     val foodstate:LiveData<List<meals>> get() = _food
+    val newfoods: MutableState<List<meals>> = mutableStateOf(listOf())
 
         val url="http://blacky.tech/mealsapi/meals.php"
         val Client= HttpClient{
@@ -30,7 +33,7 @@ class netviewmodel:ViewModel() {
             try {
                 val meals:ArrayList<meals> =Client.get(url)
                 Log.i("Mainactivity","Values in try is ${meals}")
-                _food.value=meals
+                newfoods.value=meals
             }catch (e: NoTransformationFoundException){
                 Log.i("MainActivity","Value ${e.message}")
             }

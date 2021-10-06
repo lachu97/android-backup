@@ -1,8 +1,6 @@
 package com.example.finalcomposer.composables
 
-import android.content.Context
 import android.util.Log
-import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -19,12 +17,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import com.example.finalcomposer.models.data
+import com.example.finalcomposer.models.meals
 import com.skydoves.landscapist.ShimmerParams
 import com.skydoves.landscapist.coil.CoilImage
 
 @Composable
-fun verticalist(data: List<data>) {
+fun verticalist(data: List<meals>) {
     LazyColumn(
         modifier = Modifier
             .padding(10.dp)
@@ -39,7 +37,7 @@ fun verticalist(data: List<data>) {
 }
 
 @Composable
-fun customcard(data: data, onclick: () -> Unit) {
+fun customcard(data: meals, onclick: () -> Unit) {
     Card(
         shape = MaterialTheme.shapes.small, modifier = Modifier
             .padding(5.dp)
@@ -72,10 +70,10 @@ fun customcard(data: data, onclick: () -> Unit) {
                 modifier = Modifier.padding(1.dp),
                 horizontalAlignment = Alignment.Start
             ) {
-                data.title.let {
+                data.name.let {
                     Text(text = it, style = MaterialTheme.typography.h3)
                 }
-                data.desc.let {
+                data.description.let {
                     Text(text = it, style = MaterialTheme.typography.body2)
                 }
             }
