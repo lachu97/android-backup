@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,6 +21,7 @@ import com.example.finalcomposer.models.Food
 import com.example.finalcomposer.models.data
 import com.example.finalcomposer.models.meals
 import com.example.finalcomposer.ui.theme.FinalcomposerTheme
+import com.example.finalcomposer.viewmodels.netviewmodel
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.features.*
@@ -31,20 +33,23 @@ import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
+    private val viewModel: netviewmodel by viewModels()
 
     @ExperimentalCoilApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        val foods = buildlist()
         val data = builddata()
-        CoroutineScope(IO).launch {
-            fetchnetwork()
-        }
+//        CoroutineScope(IO).launch {
+//            fetchnetwork()
+//        }
         val title = listOf("No Number", "one number", "2 no", "3 Nomber","dhjflsdh","dohf","hsflh","sgfhlk")
 
 
         setContent {
             FinalcomposerTheme {
+                val mymeals=viewModel.foodstate.value
+                Log.i("MainActivity","new meals=${mymeals}")
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
                     Greeting("Android", data = data, title = title)
